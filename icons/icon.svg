@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E192B"/>
+      <stop offset="55%" stop-color="#13111A"/>
+      <stop offset="100%" stop-color="#0B0A0F"/>
+    </linearGradient>
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6750A4"/>
+      <stop offset="100%" stop-color="#4F378B"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#D0BCFF"/>
+      <stop offset="100%" stop-color="#EFB8C8"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Adaptive Icon Background -->
+  <rect width="512" height="512" rx="116" fill="url(#bgGrad)"/>
+
+  <!-- Subtle Radar Rings -->
+  <circle cx="256" cy="256" r="196" fill="none" stroke="#D0BCFF" stroke-opacity="0.1" stroke-width="3"/>
+  <circle cx="256" cy="256" r="144" fill="none" stroke="#D0BCFF" stroke-opacity="0.16" stroke-width="3" stroke-dasharray="12 10"/>
+
+  <!-- Highway Perspective Road Lines -->
+  <path d="M136 420 L220 190 L292 190 L376 420 Z" fill="url(#shieldGrad)" opacity="0.45"/>
+  <line x1="256" y1="205" x2="256" y2="410" stroke="#EADDFF" stroke-width="10" stroke-dasharray="22 18" stroke-linecap="round"/>
+  <line x1="150" y1="412" x2="224" y2="196" stroke="url(#accentGrad)" stroke-width="10" stroke-linecap="round"/>
+  <line x1="362" y1="412" x2="288" y2="196" stroke="url(#accentGrad)" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- Top Telemetry Camera Lens Badge -->
+  <circle cx="256" cy="148" r="54" fill="#272530" stroke="#D0BCFF" stroke-width="8"/>
+  <circle cx="256" cy="148" r="24" fill="#D0BCFF"/>
+  <circle cx="264" cy="140" r="7" fill="#381E72"/>
+
+  <!-- Live Emerald Status Dot -->
+  <circle cx="384" cy="128" r="22" fill="#10B981" stroke="#13111A" stroke-width="8"/>
+</svg>

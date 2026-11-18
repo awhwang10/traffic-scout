@@ -1,0 +1,527 @@
+/* ==========================================================================
+   Traffic Scout — Component & Layout Styles
+   ========================================================================== */
+
+/* --- App Split Layout --- */
+.app-layout {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow: hidden;
+    position: relative;
+    z-index: 0;
+}
+
+.map-panel {
+    width: 100%;
+    height: 38%;
+    flex-shrink: 0;
+    background-color: var(--md-sys-color-surface-container);
+    z-index: 0;
+    border-bottom-left-radius: 26px;
+    border-bottom-right-radius: 26px;
+    overflow: hidden;
+    box-shadow: var(--md-sys-elevation-2);
+    position: relative;
+    border-bottom: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.feed-wrapper {
+    width: 100%;
+    height: 62%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background-color: var(--md-sys-color-surface);
+    position: relative;
+}
+
+.feed-panel {
+    width: 100%;
+    flex-grow: 1;
+    overflow-y: auto;
+    background-color: var(--md-sys-color-surface);
+    z-index: 0;
+    overscroll-behavior-y: contain;
+    position: relative;
+    scroll-behavior: smooth;
+}
+
+/* Optional 2-column grid mode on desktop/tablet */
+.feed-panel.grid-mode {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 16px;
+    align-content: start;
+}
+@media (min-width: 640px) {
+    .feed-panel.grid-mode {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (orientation: landscape) and (min-width: 768px) {
+    .app-layout {
+        flex-direction: row;
+    }
+    .map-panel {
+        width: 52%;
+        height: 100%;
+        border-radius: 0;
+        border-bottom: none;
+        border-top-right-radius: 28px;
+        border-bottom-right-radius: 28px;
+        border-right: 1px solid var(--md-sys-color-outline-variant);
+    }
+    .feed-wrapper {
+        width: 48%;
+        height: 100%;
+    }
+}
+
+@media (min-width: 1280px) {
+    .map-panel {
+        width: 54%;
+    }
+    .feed-wrapper {
+        width: 46%;
+    }
+}
+
+/* --- Pull-to-Refresh Spinner --- */
+#ptr-spinner {
+    position: absolute;
+    top: -48px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 44px;
+    transition: top 0.28s cubic-bezier(0.2, 0, 0, 1);
+    z-index: 30;
+    pointer-events: none;
+}
+
+.ptr-pill {
+    background-color: var(--md-sys-color-surface-container-highest);
+    color: var(--md-sys-color-primary);
+    border: 1px solid var(--md-sys-color-outline-variant);
+    box-shadow: var(--md-sys-elevation-2);
+    border-radius: 9999px;
+    padding: 6px 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* --- Two-Tier MD3 Camera Card Component --- */
+.cam-card {
+    background-color: var(--md-sys-color-surface-container-low);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--md-sys-elevation-1);
+    transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1),
+                box-shadow 0.25s cubic-bezier(0.2, 0, 0, 1),
+                border-color 0.25s ease,
+                background-color 0.25s ease;
+    border: 1.5px solid var(--md-sys-color-outline-variant);
+    scroll-margin-top: 36vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.cam-card:hover {
+    border-color: var(--md-sys-color-outline);
+    box-shadow: var(--md-sys-elevation-2);
+}
+
+.cam-card:active {
+    transform: scale(0.993);
+}
+
+/* Active State (Synced with Map Marker) */
+.cam-card.active-card {
+    background-color: var(--md-sys-color-surface-container);
+    border-color: var(--md-sys-color-primary);
+    box-shadow: var(--md-sys-elevation-glow);
+    z-index: 10;
+}
+
+.cam-card.active-card .active-indicator-bar {
+    opacity: 1;
+    transform: scaleX(1);
+}
+
+.cam-card.active-card .on-map-pill {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.active-indicator-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3.5px;
+    background: linear-gradient(90deg, var(--md-sys-color-primary), var(--md-sys-color-tertiary));
+    opacity: 0;
+    transform: scaleX(0.35);
+    transition: opacity 0.25s ease, transform 0.3s cubic-bezier(0.2, 0, 0, 1);
+    z-index: 20;
+}
+
+.on-map-pill {
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity 0.22s ease, transform 0.22s ease;
+}
+
+.cam-image-container {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+    background: var(--shimmer-gradient);
+    background-size: 200% 100%;
+    animation: shimmer 1.8s infinite linear;
+    overflow: hidden;
+}
+
+.cam-image-container.loaded {
+    animation: none;
+    background: #08080B;
+}
+
+.cam-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-color: #08080B;
+    transition: transform 0.45s cubic-bezier(0.2, 0, 0, 1), opacity 0.3s ease;
+}
+
+.cam-card:hover .cam-image {
+    transform: scale(1.022);
+}
+
+.top-card-overlay {
+    background: linear-gradient(
+        180deg,
+        rgba(8, 8, 12, 0.78) 0%,
+        rgba(8, 8, 12, 0.35) 60%,
+        rgba(8, 8, 12, 0) 100%
+    );
+}
+
+.cam-card-footer {
+    padding: 12px 14px;
+    background-color: var(--md-sys-color-surface-container-low);
+    border-top: 1px solid var(--md-sys-color-outline-variant);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    transition: background-color 0.25s ease;
+}
+
+.cam-card.active-card .cam-card-footer {
+    background-color: var(--md-sys-color-surface-container);
+}
+
+/* --- Authentic California Highway Shields --- */
+.hwy-shield {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    line-height: 16px;
+    letter-spacing: 0.025em;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.32);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.hwy-shield-interstate {
+    background: linear-gradient(180deg, #B51E2E 0%, #B51E2E 27%, #003F87 27%, #003F87 100%);
+    color: #FFFFFF;
+}
+
+.hwy-shield-us {
+    background: #FFFFFF;
+    color: #111115;
+    border: 1.5px solid #232329;
+}
+
+.hwy-shield-sr {
+    background: linear-gradient(180deg, #007A60 0%, #005C48 100%);
+    color: #FFFFFF;
+    border-radius: 8px 8px 6px 6px;
+}
+
+/* --- Live Pulse Dot --- */
+.live-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 9999px;
+    background-color: var(--status-live);
+    position: relative;
+    display: inline-block;
+}
+.live-dot::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 9999px;
+    background-color: var(--status-live);
+    animation: pulseRing 2s cubic-bezier(0.2, 0, 0, 1) infinite;
+}
+
+/* --- Standard Icon Button --- */
+.btn-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 19px;
+    color: var(--md-sys-color-on-surface-variant);
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+.btn-icon:hover {
+    background-color: var(--md-sys-state-hover);
+    color: var(--md-sys-color-on-surface);
+}
+.btn-icon:active {
+    background-color: var(--md-sys-state-pressed);
+    transform: scale(0.93);
+}
+
+/* --- Extended / Standard MD3 FAB --- */
+#ai-fab {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+    height: 56px;
+    padding: 0 20px;
+    border-radius: 18px;
+    background-color: var(--md-sys-color-tertiary-container);
+    color: var(--md-sys-color-on-tertiary-container);
+    box-shadow: var(--md-sys-elevation-3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    z-index: 1000;
+    transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1),
+                box-shadow 0.2s ease,
+                filter 0.2s ease;
+    border: 1px solid rgba(255, 255, 255, 0.26);
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.15px;
+}
+#ai-fab:hover {
+    box-shadow: 0px 8px 22px 4px rgba(0, 0, 0, 0.35);
+    filter: brightness(0.97);
+    transform: translateY(-2px);
+}
+#ai-fab:active {
+    transform: scale(0.96);
+}
+
+@media (max-width: 640px) {
+    #ai-fab {
+        width: 56px;
+        padding: 0;
+    }
+    #ai-fab .fab-label {
+        display: none;
+    }
+}
+
+/* --- Segmented Buttons --- */
+.seg-btn-active {
+    background-color: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
+    box-shadow: var(--md-sys-elevation-1);
+    font-weight: 600;
+}
+.seg-btn-inactive {
+    color: var(--md-sys-color-on-surface-variant);
+    background: transparent;
+}
+.seg-btn-inactive:hover {
+    color: var(--md-sys-color-on-surface);
+    background-color: var(--md-sys-state-hover);
+}
+
+/* --- Route & Corridor Filter Chips --- */
+.chip-scroll {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.chip-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.filter-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 11px;
+    border-radius: 9999px;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid var(--md-sys-color-outline-variant);
+    background-color: var(--md-sys-color-surface-container-low);
+    color: var(--md-sys-color-on-surface-variant);
+}
+.filter-chip:hover {
+    background-color: var(--md-sys-color-surface-container-high);
+    color: var(--md-sys-color-on-surface);
+}
+.filter-chip.active {
+    background-color: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
+    border-color: var(--md-sys-color-primary);
+    box-shadow: var(--md-sys-elevation-1);
+}
+
+/* --- Leaflet Overrides & Tactical Map Markers --- */
+.leaflet-container {
+    background: var(--md-sys-color-surface-container);
+    font-family: 'Roboto', sans-serif;
+}
+
+.leaflet-popup-content-wrapper {
+    background: var(--md-sys-color-surface-container-high);
+    color: var(--md-sys-color-on-surface);
+    border-radius: 16px;
+    box-shadow: var(--md-sys-elevation-3);
+    border: 1px solid var(--md-sys-color-outline-variant);
+    padding: 2px;
+}
+.leaflet-popup-tip {
+    background: var(--md-sys-color-surface-container-high);
+}
+.leaflet-popup-content {
+    margin: 10px 12px;
+    line-height: 1.4;
+}
+
+/* Custom User GPS Marker */
+.user-gps-marker {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.user-gps-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 9999px;
+    background: #3B82F6;
+    border: 2.5px solid #FFFFFF;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.55);
+    z-index: 2;
+}
+.user-gps-pulse {
+    position: absolute;
+    inset: -6px;
+    border-radius: 9999px;
+    background: rgba(59, 130, 246, 0.38);
+    animation: pulseRing 2.2s infinite ease-out;
+    z-index: 1;
+}
+
+/* Tactical Numbered Camera Map Pin */
+.cam-map-pin {
+    width: 22px;
+    height: 22px;
+    border-radius: 9999px;
+    background-color: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
+    border: 2px solid var(--md-sys-color-primary);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1),
+                background-color 0.22s ease,
+                box-shadow 0.22s ease;
+}
+
+.cam-map-pin:hover {
+    transform: scale(1.22);
+}
+
+.cam-map-pin.is-active {
+    background-color: var(--md-sys-color-tertiary-container);
+    color: var(--md-sys-color-on-tertiary-container);
+    border: 2.5px solid #FFFFFF;
+    box-shadow: 0 0 0 6px rgba(255, 216, 228, 0.35), 0 4px 14px rgba(0, 0, 0, 0.65);
+    transform: scale(1.28);
+}
+
+/* --- Audio Equalizer Bars for TTS --- */
+.eq-bars {
+    display: inline-flex;
+    align-items: flex-end;
+    gap: 2.5px;
+    height: 15px;
+}
+.eq-bar {
+    width: 2.5px;
+    background-color: currentColor;
+    border-radius: 2px;
+    animation: eqBounce 0.65s infinite ease-in-out;
+}
+.eq-bar:nth-child(2) { animation-delay: 0.15s; }
+.eq-bar:nth-child(3) { animation-delay: 0.3s; }
+.eq-bar:nth-child(4) { animation-delay: 0.45s; }
+
+/* --- Scrollbars --- */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--md-sys-color-outline-variant);
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--md-sys-color-outline);
+}
+
+/* --- Markdown Report Styling --- */
+.prose p { margin-bottom: 0.75em; line-height: 1.55; font-size: 13.5px; }
+.prose ul { list-style-type: disc; padding-left: 1.25em; margin-bottom: 0.75em; font-size: 13.5px; }
+.prose li { margin-bottom: 0.35em; }
+.prose strong { color: var(--md-sys-color-primary); font-weight: 600; }

@@ -1,0 +1,231 @@
+/* ==========================================================================
+   Traffic Scout — Material Design 3 (MD3) Design System & Tokens
+   ========================================================================== */
+
+:root {
+    /* --- Color Palette (Dark Default — Tactical Traffic Operations Theme) --- */
+    --md-sys-color-surface: #0F0E13;
+    --md-sys-color-surface-dim: #0A090D;
+    --md-sys-color-surface-container-lowest: #0B0A0E;
+    --md-sys-color-surface-container-low: #17161D;
+    --md-sys-color-surface-container: #1D1C24;
+    --md-sys-color-surface-container-high: #272530;
+    --md-sys-color-surface-container-highest: #32303D;
+
+    --md-sys-color-on-surface: #F2ECF8;
+    --md-sys-color-on-surface-variant: #C8C3D0;
+
+    --md-sys-color-primary: #D0BCFF;
+    --md-sys-color-on-primary: #381E72;
+    --md-sys-color-primary-container: #4F378B;
+    --md-sys-color-on-primary-container: #EADDFF;
+
+    --md-sys-color-secondary: #CCC2DC;
+    --md-sys-color-on-secondary: #332D41;
+    --md-sys-color-secondary-container: #4A4458;
+    --md-sys-color-on-secondary-container: #E8DEF8;
+
+    --md-sys-color-tertiary: #EFB8C8;
+    --md-sys-color-on-tertiary: #492532;
+    --md-sys-color-tertiary-container: #FFD8E4;
+    --md-sys-color-on-tertiary-container: #31111D;
+
+    --md-sys-color-outline: #938F99;
+    --md-sys-color-outline-variant: #3E3B47;
+
+    /* Semantic Status Tokens */
+    --status-live: #10B981;
+    --status-live-bg: rgba(16, 185, 129, 0.16);
+    --status-warning: #F59E0B;
+    --status-danger: #EF4444;
+    --caltrans-sr-green: #006B54;
+    --caltrans-interstate-blue: #003F87;
+    --caltrans-interstate-red: #AF1E2D;
+
+    /* Glass & Surface Overlay */
+    --md-sys-glass-bg: rgba(23, 22, 29, 0.84);
+    --md-sys-glass-border: rgba(208, 188, 255, 0.16);
+
+    /* Elevation Shadows */
+    --md-sys-elevation-1: 0px 2px 4px 0px rgba(0, 0, 0, 0.4), 0px 4px 12px 2px rgba(0, 0, 0, 0.22);
+    --md-sys-elevation-2: 0px 4px 8px 0px rgba(0, 0, 0, 0.45), 0px 8px 22px 4px rgba(0, 0, 0, 0.28);
+    --md-sys-elevation-3: 0px 6px 14px 0px rgba(0, 0, 0, 0.55), 0px 14px 32px 6px rgba(0, 0, 0, 0.38);
+    --md-sys-elevation-glow: 0px 0px 0px 1.5px var(--md-sys-color-primary), 0px 10px 30px -4px rgba(208, 188, 255, 0.28);
+
+    /* State Layers */
+    --md-sys-state-hover: rgba(255, 255, 255, 0.08);
+    --md-sys-state-pressed: rgba(255, 255, 255, 0.14);
+
+    /* Shimmer Gradient */
+    --shimmer-gradient: linear-gradient(
+        110deg,
+        #16151C 8%,
+        #25232F 18%,
+        #16151C 33%
+    );
+}
+
+/* --- Light Mode Tokens --- */
+[data-theme="light"] {
+    --md-sys-color-surface: #F6F5FA;
+    --md-sys-color-surface-dim: #EAE8F1;
+    --md-sys-color-surface-container-lowest: #FFFFFF;
+    --md-sys-color-surface-container-low: #FFFFFF;
+    --md-sys-color-surface-container: #EFEBF6;
+    --md-sys-color-surface-container-high: #E5E1EE;
+    --md-sys-color-surface-container-highest: #DBD6E6;
+
+    --md-sys-color-on-surface: #1A1921;
+    --md-sys-color-on-surface-variant: #494552;
+
+    --md-sys-color-primary: #6750A4;
+    --md-sys-color-on-primary: #FFFFFF;
+    --md-sys-color-primary-container: #EADDFF;
+    --md-sys-color-on-primary-container: #21005D;
+
+    --md-sys-color-secondary: #625B71;
+    --md-sys-color-on-secondary: #FFFFFF;
+    --md-sys-color-secondary-container: #E8DEF8;
+    --md-sys-color-on-secondary-container: #1D192B;
+
+    --md-sys-color-tertiary: #7D5260;
+    --md-sys-color-on-tertiary: #FFFFFF;
+    --md-sys-color-tertiary-container: #FFD8E4;
+    --md-sys-color-on-tertiary-container: #31111D;
+
+    --md-sys-color-outline: #79747E;
+    --md-sys-color-outline-variant: #CCC6D6;
+
+    --md-sys-glass-bg: rgba(255, 255, 255, 0.88);
+    --md-sys-glass-border: rgba(103, 80, 164, 0.18);
+
+    --md-sys-elevation-1: 0px 1px 3px 0px rgba(24, 18, 43, 0.07), 0px 3px 8px 1px rgba(24, 18, 43, 0.05);
+    --md-sys-elevation-2: 0px 3px 8px 0px rgba(24, 18, 43, 0.1), 0px 8px 18px 2px rgba(24, 18, 43, 0.07);
+    --md-sys-elevation-3: 0px 6px 14px 0px rgba(24, 18, 43, 0.14), 0px 12px 26px 4px rgba(24, 18, 43, 0.12);
+    --md-sys-elevation-glow: 0px 0px 0px 1.5px var(--md-sys-color-primary), 0px 10px 26px -4px rgba(103, 80, 164, 0.25);
+
+    --md-sys-state-hover: rgba(0, 0, 0, 0.05);
+    --md-sys-state-pressed: rgba(0, 0, 0, 0.11);
+
+    --shimmer-gradient: linear-gradient(
+        110deg,
+        #EAE7F2 8%,
+        #F6F5FA 18%,
+        #EAE7F2 33%
+    );
+}
+
+/* --- Base Typography & Reset --- */
+body {
+    background-color: var(--md-sys-color-surface);
+    color: var(--md-sys-color-on-surface);
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.25s ease, color 0.25s ease;
+    user-select: none;
+}
+
+.font-mono-tech {
+    font-family: 'JetBrains Mono', 'Roboto Mono', monospace;
+}
+
+/* --- MD3 Typography Scale --- */
+.type-title-large {
+    font-size: 20px;
+    line-height: 26px;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+}
+.type-title-medium {
+    font-size: 15px;
+    line-height: 21px;
+    font-weight: 600;
+    letter-spacing: 0.05px;
+}
+.type-body-medium {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+    letter-spacing: 0.15px;
+}
+.type-label-medium {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+    letter-spacing: 0.35px;
+}
+.type-label-small {
+    font-size: 11px;
+    line-height: 15px;
+    font-weight: 500;
+    letter-spacing: 0.4px;
+}
+
+/* --- Semantic Surface & Token Utilities --- */
+.bg-surface { background-color: var(--md-sys-color-surface); }
+.bg-surface-dim { background-color: var(--md-sys-color-surface-dim); }
+.bg-surface-container-low { background-color: var(--md-sys-color-surface-container-low); }
+.bg-surface-container { background-color: var(--md-sys-color-surface-container); }
+.bg-surface-container-high { background-color: var(--md-sys-color-surface-container-high); }
+.bg-surface-container-highest { background-color: var(--md-sys-color-surface-container-highest); }
+
+.bg-primary { background-color: var(--md-sys-color-primary); }
+.text-on-primary { color: var(--md-sys-color-on-primary); }
+.bg-primary-container { background-color: var(--md-sys-color-primary-container); }
+.text-on-primary-container { color: var(--md-sys-color-on-primary-container); }
+
+.bg-secondary-container { background-color: var(--md-sys-color-secondary-container); }
+.text-on-secondary-container { color: var(--md-sys-color-on-secondary-container); }
+
+.bg-tertiary-container { background-color: var(--md-sys-color-tertiary-container); }
+.text-on-tertiary-container { color: var(--md-sys-color-on-tertiary-container); }
+
+.text-on-surface { color: var(--md-sys-color-on-surface); }
+.text-on-surface-variant { color: var(--md-sys-color-on-surface-variant); }
+.text-primary { color: var(--md-sys-color-primary); }
+.text-outline { color: var(--md-sys-color-outline); }
+
+.border-outline { border-color: var(--md-sys-color-outline); }
+.border-outline-variant { border-color: var(--md-sys-color-outline-variant); }
+
+.glass-panel {
+    background: var(--md-sys-glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--md-sys-glass-border);
+}
+
+/* Header Accent Gradient Line */
+.header-accent-line {
+    height: 2px;
+    width: 100%;
+    background: linear-gradient(
+        90deg,
+        var(--md-sys-color-primary) 0%,
+        var(--md-sys-color-tertiary) 50%,
+        transparent 100%
+    );
+    opacity: 0.75;
+}
+
+/* --- Keyframe Animations --- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px) scale(0.985); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes shimmer {
+    to { background-position-x: -200%; }
+}
+
+@keyframes pulseRing {
+    0% { transform: scale(0.85); opacity: 0.85; }
+    70% { transform: scale(2.15); opacity: 0; }
+    100% { transform: scale(2.15); opacity: 0; }
+}
+
+@keyframes eqBounce {
+    0%, 100% { height: 4px; }
+    50% { height: 15px; }
+}
