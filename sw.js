@@ -2,10 +2,11 @@
 // Traffic Scout — Service Worker (App Shell Cache + Live Network Telemetry)
 // ==========================================================================
 
-const CACHE_NAME = "traffic-scout-shell-v1";
+const CACHE_NAME = "traffic-scout-shell-v2";
 const APP_SHELL = [
     "./",
     "./index.html",
+    "./robots.txt",
     "./css/tokens.css",
     "./css/components.css",
     "./js/app.js",
